@@ -17,7 +17,7 @@ const GameGrid = () => {
       >
         {isLoading &&
           skeletons.map((skeleton) => (
-            <GameCardConatiner>
+            <GameCardConatiner key={skeleton}>
               <GameCardSkeleton />
             </GameCardConatiner>
           ))}
