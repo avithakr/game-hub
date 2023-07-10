@@ -6,6 +6,7 @@ import {
   Text,
   Spinner,
   Button,
+  Heading,
 } from '@chakra-ui/react';
 import useGenres, { Genre } from '../hooks/useGenres';
 import getCroppedImageUrl from '../services/image-url';
@@ -23,29 +24,39 @@ const GenresList = ({ selectedGenre, onSelectGenre }: Props) => {
   if (isLoading) return <Spinner />;
 
   return (
-    <List>
-      {data.map((genre) => {
-        return (
-          <ListItem key={genre.id} paddingY="5px">
-            <HStack>
-              <Image
-                boxSize="32px"
-                src={getCroppedImageUrl(genre.image_background)}
-                borderRadius={8}
-              />
-              <Button
-                fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'}
-                onClick={() => onSelectGenre(genre)}
-                fontSize="lg"
-                variant="link"
-              >
-                <Text fontSize="lg">{genre.name}</Text>
-              </Button>
-            </HStack>
-          </ListItem>
-        );
-      })}
-    </List>
+    <>
+      <Heading fontSize="2xl" marginBottom={3}>
+        Genres
+      </Heading>
+      <List>
+        {data.map((genre) => {
+          return (
+            <ListItem key={genre.id} paddingY="5px">
+              <HStack>
+                <Image
+                  boxSize="32px"
+                  src={getCroppedImageUrl(genre.image_background)}
+                  borderRadius={8}
+                  objectFit="cover"
+                />
+                <Button
+                  whiteSpace="normal"
+                  textAlign="left"
+                  fontWeight={
+                    genre.id === selectedGenre?.id ? 'bold' : 'normal'
+                  }
+                  onClick={() => onSelectGenre(genre)}
+                  fontSize="lg"
+                  variant="link"
+                >
+                  <Text fontSize="lg">{genre.name}</Text>
+                </Button>
+              </HStack>
+            </ListItem>
+          );
+        })}
+      </List>
+    </>
   );
 };
 
